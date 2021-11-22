@@ -1,0 +1,36 @@
+@import "../../utils/_variables.scss";
+
+.c_editMatches-container {
+  width: 100%;
+  
+}
+
+.c_editMatches-match {
+  width: 100%;
+  background: #ccc;
+  margin: 0.3rem 0;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.c_editMatches-input {
+  width: 50px;
+}
+
+.c_editMatches-team-blue {
+  width: 15rem;
+  text-align: right;
+  margin: auto;
+}
+
+.c_editMatches-team-red {
+  width: 15rem;
+  margin: auto;
+}
+
+.c_editMatches-button {
+ 
+  padding: 5px;
+  
+}
