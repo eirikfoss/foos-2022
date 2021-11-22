@@ -1,0 +1,22 @@
+@import "../../utils/_variables.scss";
+
+.dark {
+  background: #373737;
+}
+
+.white-text {
+  p {
+    color: #fff;
+    margin: 0;
+  }
+}
+
+ul {
+  list-style: none;
+}
+
+.c_prevMatches-rating-adjustment-arrow {
+  width: 20px;
+  height: 20px;
+  background: red;
+}

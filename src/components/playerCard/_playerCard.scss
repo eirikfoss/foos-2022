@@ -1,0 +1,295 @@
+@import "../../utils/_variables.scss";
+
+.c_margin {
+  margin: 8px;
+}
+
+.flip-card {
+  background-color: transparent;
+  width: 14rem;
+  height: 22rem;
+  border-radius: 12px;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  margin: 5px;
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+/* Position the front and back side */
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  background-color: #4e6c43;
+  background-image: url(../../assets/images/carbon_texture.PNG);
+  background-size: cover;
+  border-radius: 12px;
+
+  h1 {
+    position: relative;
+  }
+  img {
+    border-radius: 12px 12px 0 0;
+    width: 100%;
+  }
+}
+
+.flip-card-img-container {
+  width: 100%;
+  height: 65%;
+  overflow: hidden;
+}
+
+/* Style the back side */
+.flip-card-back {
+  background: linear-gradient(#555, #222);
+  color: white;
+  border-radius: 12px;
+  transform: rotateY(180deg);
+  h1 {
+    font-size: 2em;
+    padding: 0.8rem 0;
+  }
+}
+
+.flip-card-back-title {
+  height: 20%;
+  background: linear-gradient(#555, #222);
+  border-radius: 12px 12px 0 0;
+  text-align: start;
+  h1 {
+    margin: 0 0 0 20px;
+  }
+}
+.flip-card-mainStats-container {
+  width: 100%;
+  height: 5.2rem;
+  display: flex;
+  justify-content: center;
+  padding-top: 5px;
+}
+.flip-card-mainStats-back-container {
+  width: 100%;
+  height: 4.3rem;
+  display: flex;
+  justify-content: center;
+  padding-top: 0px;
+  
+}
+#mainStats-rating {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  text-align: end;
+  margin-right: 10px;
+  p {
+    color: #ddd;
+    margin: 0;
+    padding-top: 5px;
+    font-size: 1.2em;
+  }
+  h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.5em;
+    color: #fff;
+  }
+}
+#mainStats-winP {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  text-align: start;
+  margin-left: 10px;
+  p {
+    color: #ddd;
+    margin: 0;
+    padding-top: 5px;
+    font-size: 1.2em;
+  }
+  h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.5em;
+    color: #fff;
+  }
+}
+#vertical-divider {
+  width: 1px;
+  height: 70%;
+  background: #888;
+  margin: auto;
+}
+.horizontal-divider {
+  height: 1px;
+  width: 90%;
+  background: #888;
+  margin: 0 auto;
+}
+.flip-card-back-secondaryStats-container {
+  text-align: start;
+  padding: 5px 18px;
+  p {
+    margin: 1.5px;
+    font-size: 1.1em;
+  }
+}
+.flip-card-back-streak-container {
+  text-align: start;
+  padding: 10px 0 0 20px;
+  p {
+    padding: 0;
+    margin: 0;
+    font-size: 1em;
+  }
+}
+
+.front-image {
+  background: lightgray;
+  position: relative;
+  width: 80%;
+  height: 60%;
+  margin: 0 auto;
+}
+
+.front-stats {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.front-stats-winp {
+  width: 3rem;
+  height: 3rem;
+  -webkit-box-shadow: inset 0px 0px 0px 5px #fff;
+  -moz-box-shadow: inset 0px 0px 0px 5px #fff;
+  box-shadow: inset 0px 0px 0px 5px #fff;
+  border-radius: 25px;
+  margin: auto;
+  position: fixed;
+  bottom: 18.5%;
+  left: 16%;
+}
+
+.front-name {
+  width: 100%;
+  height: 11.5%;
+  border-radius: 0 0 12px 12px;
+  background: black;
+  opacity: 0.6;
+  backface-visibility: hidden;
+
+  h1 {
+    color: white;
+    font-size: 1.7em;
+    font-family: brandon-grotesque, sans-serif;
+    font-weight: 700;
+
+    margin: 0;
+  }
+}
+
+$fireColor: rgb(255, 80, 0);
+$fireColorT: rgba(255, 80, 0, 0);
+$dur: 1.5s;
+$blur: 0.02em;
+$fireRad: 1em;
+$parts: 50;
+$partSize: 5em;
+
+$smallDur: 2s;
+$smallBlur: 0.02em;
+$smallFireRad: 1em;
+$smallParts: 50;
+$smallPartSize: 3em;
+
+.fire {
+  font-size: 24px;
+  filter: blur($blur);
+  -webkit-filter: blur($blur);
+  margin: -250px 0 0 -50px;
+  position: absolute;
+  z-index: -1;
+  width: 20em;
+  height: 12em;
+}
+.particle {
+  animation: rise $dur ease-in infinite;
+  background-image: radial-gradient($fireColor 20%, $fireColorT 70%);
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  opacity: 0;
+  position: absolute;
+  bottom: 0;
+  width: $smallPartSize;
+  height: $smallPartSize;
+  // spread particles out in time and x-position to get desired effect
+  @for $p from 1 through $parts {
+    &:nth-of-type(#{$p}) {
+      animation-delay: $dur * random();
+      left: calc((100% - #{$smallPartSize}) * #{($p - 1) / $parts});
+    }
+  }
+}
+
+.smallFire {
+  font-size: 24px;
+  filter: blur($blur);
+  -webkit-filter: blur($blur);
+  margin: -250px 0 0 -50px;
+  position: absolute;
+
+  width: 5em;
+  height: 12em;
+}
+.smallParticle {
+  animation: rise $smallDur ease-in infinite;
+  background-image: radial-gradient($fireColor 20%, $fireColorT 70%);
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  opacity: 0;
+  position: absolute;
+  bottom: 0;
+  width: $partSize;
+  height: $partSize;
+  // spread particles out in time and x-position to get desired effect
+  @for $p from 1 through $parts {
+    &:nth-of-type(#{$p}) {
+      animation-delay: $smallDur * random();
+      left: calc((100% - #{$partSize}) * #{($p - 1) / $parts});
+    }
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(0) scale(1);
+  }
+  25% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10em) scale(0);
+  }
+}
