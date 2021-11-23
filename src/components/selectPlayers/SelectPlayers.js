@@ -3,22 +3,20 @@ import "./_selectPlayers.scss";
 import Player from "../player/Player";
 import {
   handleChosenPlayer,
-  setChosenPlayers,
-  shuffling,
   sortPlayersBy
 } from "../../redux/players/player-action";
 import { useSelector, useDispatch } from "react-redux";
-import { createMatch, removeMatch } from "../../redux/matches/match-action";
 import redShirt from "../../assets/images/redShirt_large.png";
 import blueShirt from "../../assets/images/blueShirt_large.png";
 import startSound from "../../assets/sounds/startround_01.mp3";
+import MatchOptions from "../matchOptions/MatchOptions";
+
+
 
 const SelectPlayers = props => {
   const dispatch = useDispatch();
   const location = props.location;
   let matches = props.matches;
-
-  let {isLoading} = useSelector(state => state.matchReducer);
 
   let {
     players,
@@ -175,111 +173,6 @@ sortedMatches = sortedMatches.sort((b, a) =>
     dispatch(handleChosenPlayer(playerList, chosenPlayerList));
   };
 
-  const shuffleChosen = array => {
-    let i = array.length,
-      temp,
-      rand;
-
-    while (0 !== i) {
-      rand = Math.floor(Math.random() * i);
-      i -= 1;
-
-      temp = array[i];
-      array[i] = array[rand];
-      array[rand] = temp;
-    }
-
-    return array;
-  };
-
-  const shuffle = async () => {
-    dispatch(shuffling());
-
-    let i = 1;
-
-    function loop() {
-      setTimeout(() => {
-        dispatch(setChosenPlayers(shuffleChosen(chosenPlayerList)));
-        i++;
-        if (i < 15) {
-          loop();
-        }
-      }, 300);
-    }
-
-    loop();
-    console.log("hello");
-    dispatch(shuffling());
-  };
-
-  //Render a list of chosen players
-  const renderChosenPlayers = () => {
-    return chosenPlayerList.map(currentPlayer => {
-      return (
-        <Player
-          chosen={() => handleChosen(currentPlayer)}
-          player={currentPlayer}
-          key={currentPlayer._id}
-        />
-      );
-    });
-  };
-
-  const renderMatchOptions = () => {
-    return (
-      <>
-        {chosenPlayerList.length > 3 ? (
-          <div className="c_team-options-container">
-            <div className="c_team-options">
-              {!isShuffling && (
-                <button className="c_button-team-options" onClick={shuffle}>
-                  SHUFFLE
-                </button>
-              )}
-            </div>
-             {!isLoading ? (<button className="c_start-game-button" onClick={startGame}>
-              START GAME
-            </button>) : <div></div>
-              }
-            
-          </div>
-        ) : (
-            <div></div>
-          )}
-      </>
-    );
-  };
-
-  const startGame = async () => {
-    let teams = {
-      blue: { players: [], score: 0, adjustment: 0 },
-      red: { players: [], score: 0, adjustment: 0 }
-    };
-    let matchOver = false;
-
-    if (chosenPlayerList.length === 4) {
-      for (let i = 0; i < 2; i++) {
-        teams.blue.players.push(chosenPlayerList[i]);
-      }
-
-      for (let i = 2; i < 4; i++) {
-        teams.red.players.push(chosenPlayerList[i]);
-      }
-
-      const matchData = {
-        teams,
-        location,
-        matchOver
-      };
-
-      dispatch(createMatch(matchData));
-      if (matches.length > 15) {
-        dispatch(removeMatch(matches[0]._id));
-      }
-
-
-    }
-  };
 
   return (
     <div className="c_select-players-container">
@@ -379,8 +272,7 @@ sortedMatches = sortedMatches.sort((b, a) =>
           </div>
         </div>
       </div>
-
-      {renderMatchOptions()}
+      <MatchOptions location={location} matches={matches}  />
     </div>
   );
 };

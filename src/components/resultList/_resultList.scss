@@ -7,6 +7,7 @@
   border-bottom: solid 1px #666;
   color: white;
   padding: 10px 0 10px 0;
+  font-size: 0.85em;
 }
 
 .yellow-bgr {
@@ -45,7 +46,7 @@
 }
 
 .c_resultList-adjustment-blue {
-  display: flex;
+  display: none;
   justify-content: space-between;
   width: 7.5%;
   padding-left: 15px;
@@ -58,7 +59,7 @@
 }
 
 .c_resultList-adjustment-red {
-  display: flex;
+  display: none;
   justify-content: space-between;
   width: 7.5%;
   padding-right: 15px;
@@ -67,5 +68,20 @@
     width: 15px;
     height: 15px;
     margin: auto 0;
+  }
+}
+
+@media screen and (min-width: 778px) {
+  .c_resultList-row {
+    
+    font-size: 1em;
+  }
+
+  .c_resultList-adjustment-red {
+    display: flex;
+  }
+
+  .c_resultList-adjustment-blue {
+    display: flex;
   }
 }

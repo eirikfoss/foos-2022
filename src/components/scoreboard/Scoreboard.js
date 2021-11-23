@@ -46,6 +46,37 @@ const Scoreboard = () => {
     }
   }
 
+  const teamRedClicked = () => {
+    let newMatchData = { ...match };
+
+    if (!newMatchData.matchOver) {
+      
+        let diff =
+          calculateTeamRating(match.teams.red) -
+          calculateTeamRating(match.teams.blue);
+        newMatchData.teams.red.score++;
+        playScoreSound(newMatchData.teams.red.score, diff);
+      
+      handleScoreAdjustment(newMatchData);
+    }
+  }
+
+  const teamBlueClicked = () => {
+    let newMatchData = { ...match };
+    console.log("Blue clicked!");
+
+    if (!newMatchData.matchOver) {
+      
+      let diff =
+          calculateTeamRating(match.teams.blue) -
+          calculateTeamRating(match.teams.red);
+        newMatchData.teams.blue.score++;
+        playScoreSound(newMatchData.teams.blue.score, diff);
+    
+    handleScoreAdjustment(newMatchData);
+     }
+  }
+
   function onKeyPressed(e) {
     let newMatchData = { ...match };
 
@@ -380,6 +411,7 @@ const Scoreboard = () => {
   };
 
   return (
+    <div>
     <div
       className="p_fill"
       id="target"
@@ -391,29 +423,45 @@ const Scoreboard = () => {
       }}
       tabIndex="1"
     >
+    </div> 
       <div
         className={"c_scoreboard-container "}
         id={match.matchOver === true && "blur-container"}
       >
-        <div className="c_scoreboard-team">
-          <div className="c_scoreboard-team-color-red"></div>
-          <h1>{match.teams.red.players[0].username}</h1>
-          <h1>{match.teams.red.players[1].username}</h1>
-          <h2>{calculateTeamRating(match.teams.red).toFixed()}</h2>
+        <div className="c_scoreboard-team-container">
+          <div 
+          className="c_scoreboard-team"
+          onClick={e => teamRedClicked(e)}
+          >
+            <div className="c_scoreboard-team-color-red"></div>
+            <h2>{calculateTeamRating(match.teams.red).toFixed()}</h2>
+            <h1>{match.teams.red.players[0].username}</h1>
+            <h1>{match.teams.red.players[1].username}</h1>
+            
+
+          </div>
+
+          <div className="c_scoreboard-team" onClick={e => teamBlueClicked(e)}>
+            <div
+            className="c_scoreboard-team-color-blue"
+            
+            ></div>
+            <h2 align="right">{calculateTeamRating(match.teams.blue).toFixed()}</h2>
+            <h1>{match.teams.blue.players[0].username}</h1>
+            <h1>{match.teams.blue.players[1].username}</h1>
+            
+          </div>
 
         </div>
+        
         <div className="c_scoreboard-score">
           <h1>{match.teams.red.score + " - " + match.teams.blue.score}</h1>
         </div>
-        <div className="c_scoreboard-team">
-          <div className="c_scoreboard-team-color-blue"></div>
-          <h1>{match.teams.blue.players[0].username}</h1>
-          <h1>{match.teams.blue.players[1].username}</h1>
-          <h2 align="right">{calculateTeamRating(match.teams.blue).toFixed()}</h2>
-        </div>
+        
       </div>
 
       {match && match.matchOver && winScreen()}
+    
     </div>
   );
 };
