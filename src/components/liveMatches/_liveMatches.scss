@@ -41,14 +41,14 @@
 
 .c_team-box {
   text-align: center;
-
+  display: none;
   img {
     width: 50%;
   }
 }
 
 .c_player-box {
-  font-size: 26px;
+  font-size: 1.2em;
   padding-top: 40px;
   color: #fff;
 
@@ -66,4 +66,10 @@ ul {
   text-align: center;
   z-index: 2;
   color: #fff;
+}
+
+@media screen and (min-width: 1440px) {
+  .c_team-box {
+    display: block;
+  }
 }
